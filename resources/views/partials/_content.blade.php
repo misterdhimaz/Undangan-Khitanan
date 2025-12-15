@@ -43,9 +43,7 @@
         @keyframes spinSlow { 100% { transform: rotate(360deg); } }
         @keyframes spinReverse { 100% { transform: rotate(-360deg); } }
         @keyframes swing { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(5deg); } }
-        @keyframes pulse-slow { 0%, 100% { transform: scale(1); opacity: 0.2; } 50% { transform: scale(1.1); opacity: 0.3; } }
-
-        .animate-pulse-slow { animation: pulse-slow 8s infinite; }
+        /* pulse-slow dihapus dari penggunaan, tapi dibiarkan di CSS tidak masalah */
 
         /* Modal Transitions */
         .modal-overlay { transition: opacity 0.3s ease, visibility 0.3s ease; opacity: 0; visibility: hidden; }
@@ -56,24 +54,22 @@
 </head>
 <body class="bg-gray-100 antialiased overflow-x-hidden">
 
-    {{-- WRAPPER UTAMA: Membatasi lebar agar seperti Aplikasi Mobile di Desktop --}}
+    {{-- WRAPPER UTAMA --}}
     <div class="w-full max-w-[550px] mx-auto min-h-screen bg-white shadow-2xl relative">
 
         {{-- ROYAL MAIN CONTENT --}}
         <main id="royal-content" class="w-full pb-10 relative overflow-hidden bg-gradient-to-b from-[#F0FDF4] via-white to-[#F0FDF4]">
 
-            {{-- ================= 1. GLOBAL BACKGROUND FX ================= --}}
+            {{-- ================= 1. GLOBAL BACKGROUND FX (HANYA TEXTURE STATIS) ================= --}}
             <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-                {{-- Pattern Texture --}}
-                <div class="absolute inset-0 opacity-[0.04]"
+                {{-- Pattern Texture (Sangat tipis, tidak bergerak) --}}
+                <div class="absolute inset-0 opacity-[0.03]"
                      style="background-image: url('https://www.transparenttextures.com/patterns/arabesque.png'); background-attachment: scroll;"></div>
 
-                {{-- Animated Blobs (Background) --}}
-                <div class="absolute top-[-10%] left-[-20%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-emerald-300/20 rounded-full blur-[60px] animate-pulse-slow"></div>
-                <div class="absolute bottom-[-10%] right-[-20%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-yellow-400/10 rounded-full blur-[60px] animate-pulse-slow" style="animation-delay: 2s"></div>
+                {{-- Animated Blobs TELAH DIHAPUS AGAR RINGAN --}}
             </div>
 
-            {{-- Ornamen Sudut --}}
+            {{-- Ornamen Sudut (Tetap ada karena ringan) --}}
             <div class="absolute top-0 left-0 w-32 sm:w-48 h-32 sm:h-48 z-10 pointer-events-none opacity-40 mix-blend-multiply">
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#047857" d="M0 0 L150 0 Q75 75 0 150 Z" /><path fill="none" stroke="#B48E43" stroke-width="2" d="M10 10 L130 10 Q70 70 10 130 Z"/></svg>
             </div>
@@ -82,7 +78,7 @@
             </div>
 
             {{-- ================= 2. HEADER SECTION ================= --}}
-            <section class="relative pt-24 pb-20 px-4 sm:px-6 text-center bg-white rounded-b-[60px] sm:rounded-b-[80px] shadow-xl z-20 overflow-hidden border-b-4 border-[#B48E43]/20">
+            <section class="relative pt-10 pb-20 px-4 sm:px-6 text-center bg-white rounded-b-[60px] sm:rounded-b-[80px] shadow-xl z-20 overflow-hidden border-b-4 border-[#B48E43]/20">
 
                 {{-- Animasi Lentera --}}
                 <div class="absolute top-0 left-8 sm:left-12 animate-[swing_3s_ease-in-out_infinite] origin-top">
@@ -95,7 +91,7 @@
                 </div>
 
                 <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Basmala.svg"
-                     class="h-16 sm:h-20 mx-auto mt-8 mb-4 opacity-80 filter brightness-0 sepia(1) hue-rotate(50deg) saturate(3) drop-shadow-sm"
+                     class="h-16 sm:h-20 mx-auto mt-10 mb-4 opacity-80 filter brightness-0 sepia(1) hue-rotate(50deg) saturate(3) drop-shadow-sm"
                      data-aos="fade-down" data-aos-duration="1000">
 
                 <h2 class="font-decor text-3xl sm:text-5xl font-bold text-[#064E3B] mb-4 leading-snug" data-aos="fade-up">
