@@ -91,7 +91,7 @@
                 </h2>
             </div>
 
-            {{-- 7. Tombol Buka --}}
+            {{- 7. Tombol Buka -}}
             <button onclick="openRoyalInvitation()"
                     class="btn-shimmer w-full py-3 sm:py-4 rounded-full text-white font-bold text-sm sm:text-lg shadow-lg flex items-center justify-center gap-2 transition transform hover:scale-105 active:scale-95 cursor-pointer">
                 <i class="fa-solid fa-envelope-open text-base sm:text-xl"></i>
