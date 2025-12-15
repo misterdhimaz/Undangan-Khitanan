@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Undangan Walimatul Khitan Eksklusif - Muhammad Wahid Arsyaka">
     <meta name="theme-color" content="#047857">
-    <title>Royal Invitation - M. Wahid Arsyaka</title>
+    <title>M. Wahid Arsyaka</title>
+    {{-- TAMBAHKAN INI UNTUK GANTI LOGO --}}
+    <link rel="icon" type="image/png" href="{{ asset('foto.png') }}">
+    <link rel="shortcut icon" href="{{ asset('foto.png') }}">
 
     {{-- PREMIUM FONTS --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

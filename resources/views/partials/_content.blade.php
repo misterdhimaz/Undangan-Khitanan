@@ -124,10 +124,10 @@
                     <div class="royal-glass p-6 sm:p-8 rounded-[30px] sm:rounded-[40px] border border-[#B48E43]/30 relative bg-white/90">
                         <i class="fa-solid fa-quote-right text-4xl sm:text-5xl text-[#064E3B]/10 absolute -top-4 -right-2"></i>
                         <p class="text-[#064E3B] font-serif italic text-base sm:text-xl leading-relaxed relative z-10">
-                            "Cucu adalah mahkota orang-orang tua, dan kemuliaan anak-anak ialah nenek moyang mereka."
+                            "Ke mana pun kakimu melangkah, doa kami akan selalu menjadi payung yang melindungimu."
                         </p>
                         <div class="w-16 h-[2px] bg-[#B48E43] mx-auto my-4 opacity-50"></div>
-                        <p class="text-xs text-[#B48E43] font-bold uppercase tracking-[0.3em]">— Amsal 17:6</p>
+                        <p class="text-xs text-[#B48E43] font-bold uppercase tracking-[0.3em]">— Kakek dan Nenek</p>
                     </div>
                 </div>
             </section>
@@ -292,11 +292,35 @@
                 <div class="p-2 sm:p-4 bg-gradient-to-br from-[#FDE68A] via-[#B48E43] to-[#064E3B] rounded-[30px] sm:rounded-[45px] shadow-2xl max-w-xl mx-auto" data-aos="zoom-in">
                     <div class="swiper mySwiper rounded-[25px] sm:rounded-[35px] overflow-hidden aspect-[4/5] sm:aspect-[4/3] border-[4px] sm:border-[6px] border-white bg-white shadow-inner">
                         <div class="swiper-wrapper">
-                            {{-- Ganti dengan foto asli --}}
-                            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1545622081-30919315d862?q=80&w=800" class="w-full h-full object-cover"></div>
-                            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=800" class="w-full h-full object-cover"></div>
-                            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800" class="w-full h-full object-cover"></div>
-                        </div>
+
+    {{-- FOTO 1 --}}
+    <div class="swiper-slide">
+        {{-- Pastikan file ada di: public/galeri/1.jpg --}}
+        <img src="{{ asset('/1.jpeg') }}"
+             class="w-full h-full object-cover"
+             alt="Momen 1"
+             onerror="this.src='https://via.placeholder.com/400x500?text=Foto+Tidak+Ditemukan'">
+    </div>
+
+    {{-- FOTO 2 --}}
+    <div class="swiper-slide">
+        {{-- Pastikan file ada di: public/galeri/2.jpg --}}
+        <img src="{{ asset('/2.jpeg') }}"
+             class="w-full h-full object-cover"
+             alt="Momen 2"
+             onerror="this.src='https://via.placeholder.com/400x500?text=Foto+Tidak+Ditemukan'">
+    </div>
+
+    {{-- FOTO 3 --}}
+    <div class="swiper-slide">
+        {{-- Pastikan file ada di: public/galeri/3.jpg --}}
+        <img src="{{ asset('/3.jpeg') }}"
+             class="w-full h-full object-cover"
+             alt="Momen 3"
+             onerror="this.src='https://via.placeholder.com/400x500?text=Foto+Tidak+Ditemukan'">
+    </div>
+</div>
+
                         <div class="swiper-button-next !text-[#B48E43] !scale-75 sm:!scale-100"></div>
                         <div class="swiper-button-prev !text-[#B48E43] !scale-75 sm:!scale-100"></div>
                         <div class="swiper-pagination !bottom-4"></div>
@@ -449,18 +473,18 @@
                     {{-- Bank 1 --}}
                     <div class="bg-white p-4 sm:p-5 rounded-[25px] border-2 border-gray-100 flex items-center justify-between hover:border-[#D97706] transition group shadow-sm">
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <div class="w-12 h-8 sm:w-14 sm:h-10 bg-[#00529C] rounded-lg flex items-center justify-center text-white font-bold italic text-xs sm:text-sm shadow-sm">BCA</div>
-                            <div><p class="font-bold text-lg sm:text-xl text-gray-800 tracking-wider">1234567890</p><p class="text-[10px] sm:text-xs text-gray-500">a.n Bpk. Suwito</p></div>
+                            <div class="w-12 h-8 sm:w-14 sm:h-10 bg-[#00529C] rounded-lg flex items-center justify-center text-yellow-400 font-bold italic text-xs sm:text-sm shadow-sm">Mandiri</div>
+                            <div><p class="font-bold text-lg sm:text-l text-gray-800 tracking-wider">1790003568198</p><p class="text-[10px] sm:text-xs text-gray-500">a.n Wahyu Wulandari</p></div>
                         </div>
-                        <button onclick="copyToClipboard('1234567890')" class="w-8 h-8 sm:w-10 sm:h-10 bg-[#FEF3C7] text-[#D97706] rounded-full flex items-center justify-center hover:bg-[#D97706] hover:text-white transition active:scale-90 shadow-sm cursor-pointer"><i class="fa-regular fa-copy"></i></button>
+                        <button onclick="copyToClipboard('1790003568198')" class="w-8 h-8 sm:w-10 sm:h-10 bg-[#FEF3C7] text-[#D97706] rounded-full flex items-center justify-center hover:bg-[#D97706] hover:text-white transition active:scale-90 shadow-sm cursor-pointer"><i class="fa-regular fa-copy"></i></button>
                     </div>
                     {{-- Bank 2 --}}
                     <div class="bg-white p-4 sm:p-5 rounded-[25px] border-2 border-gray-100 flex items-center justify-between hover:border-[#059669] transition group shadow-sm">
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <div class="w-12 h-8 sm:w-14 sm:h-10 bg-[#10B981] rounded-lg flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-sm">GOPAY</div>
-                            <div><p class="font-bold text-lg sm:text-xl text-gray-800 tracking-wider">08123456789</p><p class="text-[10px] sm:text-xs text-gray-500">a.n Ibu Ndari</p></div>
+                            <div class="w-12 h-8 sm:w-14 sm:h-10 bg-[#00529C] rounded-lg flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-sm">BRI</div>
+                            <div><p class="font-bold text-lg sm:text-l text-gray-800 tracking-wider">031801021049503</p><p class="text-[10px] sm:text-xs text-gray-500">a.n Suwito Haryoko</p></div>
                         </div>
-                        <button onclick="copyToClipboard('08123456789')" class="w-8 h-8 sm:w-10 sm:h-10 bg-[#D1FAE5] text-[#059669] rounded-full flex items-center justify-center hover:bg-[#059669] hover:text-white transition active:scale-90 shadow-sm cursor-pointer"><i class="fa-regular fa-copy"></i></button>
+                        <button onclick="copyToClipboard('031801021049503')" class="w-8 h-8 sm:w-10 sm:h-10 bg-[#D1FAE5] text-[#059669] rounded-full flex items-center justify-center hover:bg-[#059669] hover:text-white transition active:scale-90 shadow-sm cursor-pointer"><i class="fa-regular fa-copy"></i></button>
                     </div>
                 </div>
             </div>
