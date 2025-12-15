@@ -426,7 +426,7 @@
                         <div class="rounded-[25px] sm:rounded-[38px] overflow-hidden h-[300px] sm:h-[400px] relative border-4 border-[#022c22] shadow-inner bg-gray-200">
                              {{-- Ganti src iframe sesuai maps asli --}}
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.3664472833148!2d102.16669!3d-3.37583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMjInMzMuMCJTIDEwMsKwMTAnMDAuMSJF!5e0!3m2!1sen!2sid!4v1634567890123!5m2!1sen!2sid"
+                                src="https://www.google.com/maps?q=-3.3280231,102.0265238&z=17&hl=en"
                                 width="100%"
                                 height="100%"
                                 style="border:0;"
@@ -436,7 +436,7 @@
                         </div>
                     </div>
 
-                    <a href="https://goo.gl/maps/xyz" target="_blank" class="inline-flex items-center gap-3 sm:gap-4 bg-gradient-to-r from-[#B48E43] to-[#D97706] text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-xl shadow-[#B48E43]/40 hover:shadow-2xl hover:scale-105 transition-all group mb-12 sm:mb-20 border-2 border-[#FDE68A]/50">
+                    <a href="https://www.google.com/maps?q=-3.3280231,102.0265238&z=17&hl=en" target="_blank" class="inline-flex items-center gap-3 sm:gap-4 bg-gradient-to-r from-[#B48E43] to-[#D97706] text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-xl shadow-[#B48E43]/40 hover:shadow-2xl hover:scale-105 transition-all group mb-12 sm:mb-20 border-2 border-[#FDE68A]/50">
                         <i class="fa-solid fa-map-location-dot text-xl sm:text-2xl group-hover:animate-wiggle"></i> Buka di Google Maps
                     </a>
 
