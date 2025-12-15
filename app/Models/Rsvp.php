@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Guest extends Model
+class Rsvp extends Model
 {
     use HasFactory;
 
-    // Kita izinkan kolom-kolom ini diisi otomatis
     protected $fillable = [
-        'name',
-        'slug',
+        'name_rsvp',
         'status_rsvp',
         'attendance_count'
     ];

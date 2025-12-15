@@ -3,25 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+// PENTING: Import Model yang dibutuhkan
 use App\Models\Guest;
 use App\Models\Wish;
+use App\Models\Rsvp;
 
 class InvitationController extends Controller
 {
     public function index(Request $request)
     {
-        // Ambil nama tamu dari parameter URL ?to=Nama
+        // 1. Ambil nama tamu dari URL ?to=Nama
         $guestName = $request->query('to', 'Tamu Undangan');
 
-        // Ambil semua ucapan
+        // 2. Ambil ucapan & rsvp terbaru untuk ditampilkan
         $wishes = Wish::latest()->get();
 
+        // 3. Kirim data ke view
         return view('invitation', [
-            'guest' => (object)['name' => $guestName], // Mock object biar gak error
+            'guest' => (object)['name' => $guestName],
             'wishes' => $wishes
         ]);
     }
 
+   public function storeWish(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'sender_name_wish' => 'required',
+            'message_wish' => 'required',
+        ]);
+
+        // Simpan ke database
+        Wish::create([
+            'sender_name' => $request->sender_name_wish,
+            'message' => $request->message_wish
+        ]);
+
+        return back()->with('success_wish', 'Terima kasih atas doa restunya!');
+    }
+
+    // PERBAIKAN DI SINI: Nama fungsi diubah jadi 'storeRsvp'
     public function storeRsvp(Request $request)
     {
         $request->validate([
@@ -29,31 +51,24 @@ class InvitationController extends Controller
             'status_rsvp' => 'required',
         ]);
 
-        // Simpan logika RSVP (Sederhana: update atau create baru)
+        // Simpan atau Update data Tamu di tabel Guests
+        // Kita pakai updateOrCreate agar jika tamu sudah ada, datanya diupdate
         Guest::updateOrCreate(
-            ['name' => $request->name_rsvp],
+            ['name' => $request->name_rsvp], // Cari berdasarkan nama
             [
-                'slug' => \Str::slug($request->name_rsvp),
+                'slug' => Str::slug($request->name_rsvp),
                 'status_rsvp' => $request->status_rsvp,
                 'attendance_count' => $request->attendance_count ?? 1
             ]
         );
 
-        return back()->with('success_rsvp', 'Terima kasih, konfirmasi kehadiran berhasil dikirim!');
-    }
+        // OPSIONAL: Jika kamu mau simpan ke tabel Rsvp juga (untuk history)
+        Rsvp::create([
+            'name_rsvp' => $request->name_rsvp,
+           'status_rsvp' => $request->status_rsvp,
+           'attendance_count' => $request->attendance_count ?? 1
+         ]);
 
-    public function storeWish(Request $request)
-    {
-        $request->validate([
-            'sender_name_wish' => 'required',
-            'message_wish' => 'required',
-        ]);
-
-        Wish::create([
-            'sender_name' => $request->sender_name_wish,
-            'message' => $request->message_wish
-        ]);
-
-        return back()->with('success_wish', 'Terima kasih atas doa dan ucapannya!');
+        return back()->with('success_rsvp', 'Konfirmasi kehadiran berhasil dikirim!');
     }
 }

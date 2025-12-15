@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('wishes', function (Blueprint $table) {
-        $table->id();
-        $table->string('sender_name');
-        $table->text('message');
-        $table->timestamps();
-    });
+Schema::create('wishes', function (Blueprint $table) {
+    $table->id();
+    $table->string('sender_name'); // Harus sama dengan di Controller
+    $table->text('message');       // Harus sama dengan di Controller
+    $table->timestamps();
+});
 }
 
     /**

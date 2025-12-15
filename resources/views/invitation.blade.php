@@ -19,6 +19,7 @@
     {{-- LIBRARIES --}}
     {{-- Tailwind tetap ada untuk utilitas dasar, tapi kita akan menimpa banyak dengan custom CSS --}}
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
@@ -197,77 +198,114 @@
 
     </div>
 
-    {{-- 4. SCRIPTS (Libraries & Global Logic) --}}
+  {{-- 4. SCRIPTS (Libraries & Global Logic) --}}
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    {{-- Tambahkan SweetAlert2 untuk Popup Cantik --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         // --- GLOBAL VARIABLES ---
         const audio = document.getElementById('royal-audio');
         const musicBtn = document.getElementById('music-toggle-btn');
+        const coverScreen = document.getElementById('royal-cover');
+        const mainContent = document.getElementById('royal-content'); // Pastikan ID ini ada di <main>
         let isMusicPlaying = false;
 
+        // --- 1. LOGIKA CEK SESSION (PENTING: Agar tidak balik ke cover setelah submit) ---
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // Generate Particles (Kode lama kamu)
+            const container = document.getElementById('bg-effects-container');
+            if(container) {
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('gold-particle');
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.animationDelay = `${Math.random() * 15}s`;
+                    particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                    container.appendChild(particle);
+                }
+            }
+
+            // CEK APAKAH ADA PESAN SUKSES DARI LARAVEL?
+            @if(session('success_rsvp') || session('success_wish'))
+                // A. Bypass Cover (Langsung hilangkan cover & munculkan konten)
+                coverScreen.style.display = 'none';
+                mainContent.classList.remove('hidden');
+
+                // B. Munculkan Tombol Musik (Opsional, status pause dulu)
+                musicBtn.classList.remove('hidden');
+
+                // C. Tampilkan Popup Berhasil (SweetAlert)
+                Swal.fire({
+                    title: 'Alhamdulillah!',
+                    text: "{{ session('success_rsvp') ?? session('success_wish') }}",
+                    icon: 'success',
+                    confirmButtonText: 'Tutup',
+                    confirmButtonColor: '#064E3B', // Emerald Dark
+                    background: '#ffffff',
+                    color: '#064E3B',
+                    iconColor: '#B48E43', // Gold
+                    showClass: { popup: 'animate__animated animate__fadeInDown' },
+                    hideClass: { popup: 'animate__animated animate__fadeOutUp' },
+                    customClass: {
+                        popup: 'rounded-[30px] border-2 border-[#B48E43]', // Styling border emas
+                        title: 'font-decor',
+                        content: 'font-body'
+                    }
+                });
+
+                // D. (Opsional) Scroll otomatis ke bagian Ucapan jika itu adalah submit ucapan
+                @if(session('success_wish'))
+                    // Pastikan kamu punya ID 'wish-section' di section ucapan
+                    const wishSection = document.getElementById('wish-section');
+                    if(wishSection) wishSection.scrollIntoView({ behavior: 'smooth' });
+                @endif
+
+            @endif
+        });
+
         // --- INIT LIBRARIES ---
-        // AOS dengan settingan yang lebih smooth
         AOS.init({
-            duration: 1200, // Durasi lebih lama agar smooth
+            duration: 1200,
             easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-            once: false, // Animasi berulang saat di-scroll up/down
+            once: false,
             mirror: true,
             offset: 80,
         });
 
-        // --- PARTICLE SYSTEM GENERATOR ---
-        // Membuat 30 partikel emas yang melayang secara acak
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('bg-effects-container');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('gold-particle');
-                // Randomize posisi awal dan delay animasi agar terlihat natural
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 15}s`;
-                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
-                container.appendChild(particle);
-            }
-        });
-
         // --- OPEN INVITATION LOGIC ---
-        // Fungsi ini dipanggil dari tombol di _cover.blade.php
         function openRoyalInvitation() {
-            const coverScreen = document.getElementById('royal-cover');
-            const mainContent = document.getElementById('royal-content');
-
             // 1. Kunci scroll tubuh saat transisi
             document.body.style.overflow = 'hidden';
 
-            // 2. Mainkan Musik (Browser policy butuh interaksi user dulu)
-            audio.volume = 0.6; // Set volume agar tidak kaget
+            // 2. Mainkan Musik
+            audio.volume = 0.6;
             const playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
                     isMusicPlaying = true;
                     musicBtn.classList.add('music-spin');
                 }).catch(error => {
-                    console.log("Autoplay dicegah browser, user harus klik manual play.");
+                    console.log("Autoplay dicegah browser.");
                 });
             }
 
-            // 3. Animasi Cover "Terangkat" (Slide Up dengan Easing mewah)
-            // Menggunakan transform translate3d untuk performa GPU yang lebih baik
+            // 3. Animasi Cover "Terangkat"
             coverScreen.style.transition = 'transform 1.8s cubic-bezier(0.7, 0, 0.3, 1), opacity 1.8s ease-out';
             coverScreen.style.transform = 'translate3d(0, -100%, 0) scale(0.95)';
             coverScreen.style.opacity = '0';
 
-            // 4. Tampilkan Konten Utama & Tombol Musik
+            // 4. Tampilkan Konten Utama
             mainContent.classList.remove('hidden');
             musicBtn.classList.remove('hidden');
 
-            // 5. Bersihkan DOM setelah animasi selesai
+            // 5. Bersihkan DOM
             setTimeout(() => {
                 coverScreen.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Buka kunci scroll
-                AOS.refresh(); // Refresh AOS agar mendeteksi posisi elemen baru
+                document.body.style.overflow = 'auto';
+                AOS.refresh();
             }, 1800);
         }
 
@@ -276,7 +314,6 @@
             if(isMusicPlaying) {
                 audio.pause();
                 musicBtn.classList.remove('music-spin');
-                // Ubah ikon jadi pause (opsional, tapi efek spin stop sudah cukup jelas)
             } else {
                 audio.play();
                 musicBtn.classList.add('music-spin');
@@ -284,13 +321,26 @@
             isMusicPlaying = !isMusicPlaying;
         }
 
-        // --- HELPER: COPY TO CLIPBOARD (Untuk Modal Gift) ---
+        // --- COPY TO CLIPBOARD (Dengan SweetAlert Toast) ---
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                // Bisa tambahkan toast/alert kustom yang lebih cantik di sini
-                alert("Nomor rekening berhasil disalin: " + text);
-            }).catch(err => {
-                console.error('Gagal menyalin teks', err);
+                // Gunakan Toast SweetAlert biar lebih elegan
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Nomor berhasil disalin!'
+                });
             });
         }
     </script>
