@@ -182,7 +182,7 @@
     {{-- 2. AUDIO PLAYER --}}
     <audio id="royal-audio" loop preload="auto">
         {{-- Pastikan file musik ada di public/music/blue.mp3 --}}
-        <source src="{{ asset('/blue.mp3') }}" type="audio/mpeg">
+        <source src="{{ $setting->music_path }}" type="audio/mpeg">
     </audio>
     {{-- Tombol musik hanya muncul setelah undangan dibuka --}}
     <div id="music-toggle-btn" class="music-control-btn hidden" onclick="toggleRoyalMusic()">

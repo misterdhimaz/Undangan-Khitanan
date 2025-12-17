@@ -314,7 +314,7 @@
                                 @if($setting->music_path)
                                     <div class="mt-4 flex items-center gap-3 bg-white/80 p-3 rounded-2xl border border-amber-200 shadow-sm backdrop-blur-sm">
                                         <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 animate-pulse"><i class="fa-solid fa-volume-high"></i></div>
-                                        <audio controls class="h-8 w-full rounded-lg shadow-inner bg-amber-50"><source src="{{ asset('storage/' . $setting->music_path) }}" type="audio/mpeg"></audio>
+                                        <audio controls class="h-8 w-full rounded-lg shadow-inner bg-amber-50"><source src="{{ $setting->music_path }}" type="audio/mpeg"></audio>
                                     </div>
                                 @else
                                     <div class="mt-4 p-3 bg-gray-100/50 rounded-2xl flex items-center justify-center text-xs text-gray-500 italic border border-dashed border-gray-300">
