@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Undangan Walimatul Khitan Eksklusif - Muhammad Wahid Arsyaka">
     <meta name="theme-color" content="#047857">
-<title>M. Wahid Arsyaka</title>
+<title>M. Wahid Arsyakaa</title>
 
-    {{-- GANTI LOGO TITLE DENGAN 1.jpeg --}}
-    <link rel="icon" type="/image/jpeg" href="{{ asset('/1.jpeg') }}">
-    <link rel="shortcut icon" type="/image/jpeg" href="{{ asset('/1.jpeg') }}">
+{{-- Tambahkan ?v=2 di akhir agar browser me-reload logo baru --}}
+<link rel="icon" type="image/jpeg" href="{{ asset('logo_baru.jpeg') }}">
+<link rel="shortcut icon" type="image/jpeg" href="{{ asset('logo_baru.jpeg') }}">
 
     {{-- PREMIUM FONTS --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

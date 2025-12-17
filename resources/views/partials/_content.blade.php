@@ -20,6 +20,7 @@
             --font-decor: 'Cinzel Decorative', serif;
             --font-script: 'Alex Brush', cursive;
             --font-body: 'Outfit', sans-serif;
+            --gold: #B48E43;
         }
         .font-decor { font-family: var(--font-decor); }
         .font-script { font-family: var(--font-script); }
@@ -43,13 +44,24 @@
         @keyframes spinSlow { 100% { transform: rotate(360deg); } }
         @keyframes spinReverse { 100% { transform: rotate(-360deg); } }
         @keyframes swing { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(5deg); } }
-        /* pulse-slow dihapus dari penggunaan, tapi dibiarkan di CSS tidak masalah */
 
         /* Modal Transitions */
         .modal-overlay { transition: opacity 0.3s ease, visibility 0.3s ease; opacity: 0; visibility: hidden; }
         .modal-overlay:not(.hidden) { opacity: 1; visibility: visible; }
-        .modal-content { transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .modal-content { transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .modal-overlay:not(.hidden) .modal-content { transform: scale(1); }
+
+        /* --- SWIPER CUSTOMIZATION (ELEGANT SLIDER) --- */
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--gold) !important;
+            background: rgba(255, 255, 255, 0.8);
+            width: 40px; height: 40px; border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .swiper-button-next:after, .swiper-button-prev:after { font-size: 18px !important; font-weight: bold; }
+        .swiper-button-next:hover, .swiper-button-prev:hover { background: var(--gold); color: white !important; }
+        .swiper-pagination-bullet-active { background: var(--gold) !important; }
     </style>
 </head>
 <body class="bg-gray-100 antialiased overflow-x-hidden">
@@ -60,16 +72,10 @@
         {{-- ROYAL MAIN CONTENT --}}
         <main id="royal-content" class="w-full pb-10 relative overflow-hidden bg-gradient-to-b from-[#F0FDF4] via-white to-[#F0FDF4]">
 
-            {{-- ================= 1. GLOBAL BACKGROUND FX (HANYA TEXTURE STATIS) ================= --}}
+            {{-- 1. GLOBAL BACKGROUND FX --}}
             <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-                {{-- Pattern Texture (Sangat tipis, tidak bergerak) --}}
-                <div class="absolute inset-0 opacity-[0.03]"
-                     style="background-image: url('https://www.transparenttextures.com/patterns/arabesque.png'); background-attachment: scroll;"></div>
-
-                {{-- Animated Blobs TELAH DIHAPUS AGAR RINGAN --}}
+                <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/arabesque.png'); background-attachment: scroll;"></div>
             </div>
-
-            {{-- Ornamen Sudut (Tetap ada karena ringan) --}}
             <div class="absolute top-0 left-0 w-32 sm:w-48 h-32 sm:h-48 z-10 pointer-events-none opacity-40 mix-blend-multiply">
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#047857" d="M0 0 L150 0 Q75 75 0 150 Z" /><path fill="none" stroke="#B48E43" stroke-width="2" d="M10 10 L130 10 Q70 70 10 130 Z"/></svg>
             </div>
@@ -77,10 +83,8 @@
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#047857" d="M0 0 L150 0 Q75 75 0 150 Z" /><path fill="none" stroke="#B48E43" stroke-width="2" d="M10 10 L130 10 Q70 70 10 130 Z"/></svg>
             </div>
 
-            {{-- ================= 2. HEADER SECTION ================= --}}
+            {{-- 2. HEADER SECTION --}}
             <section class="relative pt-10 pb-20 px-4 sm:px-6 text-center bg-white rounded-b-[60px] sm:rounded-b-[80px] shadow-xl z-20 overflow-hidden border-b-4 border-[#B48E43]/20">
-
-                {{-- Animasi Lentera --}}
                 <div class="absolute top-0 left-8 sm:left-12 animate-[swing_3s_ease-in-out_infinite] origin-top">
                     <div class="w-[1px] h-20 sm:h-24 bg-[#B48E43]/60 mx-auto"></div>
                     <div class="w-5 h-7 sm:w-6 sm:h-8 bg-[#FEF3C7] border border-[#B48E43] rounded-b-lg shadow-[0_0_15px_#FDE68A]"></div>
@@ -90,9 +94,7 @@
                     <div class="w-6 h-9 sm:w-8 sm:h-10 bg-[#FEF3C7] border border-[#B48E43] rounded-b-lg shadow-[0_0_15px_#FDE68A]"></div>
                 </div>
 
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Basmala.svg"
-                     class="h-16 sm:h-20 mx-auto mt-10 mb-4 opacity-80 filter brightness-0 sepia(1) hue-rotate(50deg) saturate(3) drop-shadow-sm"
-                     data-aos="fade-down" data-aos-duration="1000">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Basmala.svg" class="h-16 sm:h-20 mx-auto mt-10 mb-4 opacity-80 filter brightness-0 sepia(1) hue-rotate(50deg) saturate(3) drop-shadow-sm" data-aos="fade-down" data-aos-duration="1000">
 
                 <h2 class="font-decor text-3xl sm:text-5xl font-bold text-[#064E3B] mb-4 leading-snug" data-aos="fade-up">
                     Assalamu’alaikum <br>
@@ -103,45 +105,31 @@
                     Dengan memohon Rahmat dan Ridho Allah SWT, kami bermaksud menyelenggarakan syukuran Walimatul Khitan putra kami tercinta.
                 </p>
 
-                {{-- Profile Photo Responsive --}}
+                {{-- Profile Photo --}}
                 <div class="relative w-48 h-48 sm:w-64 sm:h-64 mx-auto mb-8 group" data-aos="zoom-in" data-aos-delay="400">
                     <div class="absolute inset-[-10px] sm:inset-[-15px] border-[1px] border-[#B48E43]/30 rounded-full animate-[spinSlow_30s_linear_infinite]"></div>
                     <div class="absolute inset-[-5px] sm:inset-[-8px] border-[2px] border-dashed border-[#064E3B]/40 rounded-full animate-[spinReverse_20s_linear_infinite]"></div>
                     <div class="relative w-full h-full rounded-full p-2 bg-white shadow-2xl overflow-hidden">
                         <img src="{{ asset('/foto.png') }}" class="w-full h-full object-cover rounded-full transform group-hover:scale-110 transition duration-700 filter contrast-110" alt="Mempelai" onerror="this.src='https://via.placeholder.com/300?text=Foto+Putra'">
                     </div>
-                    <div class="absolute -bottom-4 sm:-bottom-5 left-1/2 -translate-x-1/2 bg-[#064E3B] text-[#FDE68A] px-6 sm:px-8 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold tracking-widest border-2 border-[#FDE68A] shadow-lg whitespace-nowrap z-20">
-                        CUCU TERCINTA
-                    </div>
+                    <div class="absolute -bottom-4 sm:-bottom-5 left-1/2 -translate-x-1/2 bg-[#064E3B] text-[#FDE68A] px-6 sm:px-8 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold tracking-widest border-2 border-[#FDE68A] shadow-lg whitespace-nowrap z-20">CUCU TERCINTA</div>
                 </div>
 
                 <h3 class="font-body font-bold text-2xl sm:text-3xl text-gray-800 mb-1" data-aos="fade-up">Bpk. Suwito Haryoko & Ibu Ndari</h3>
                 <p class="text-[#064E3B] font-medium tracking-[0.2em] uppercase text-xs sm:text-sm mb-8" data-aos="fade-up" data-aos-delay="100">Kakek & Nenek</p>
 
-                {{-- Quote Box --}}
                 <div class="relative mx-auto max-w-sm sm:max-w-md mb-8" data-aos="zoom-in" data-aos-delay="200">
                     <div class="absolute inset-0 bg-[#F0FDF4] rounded-[30px] sm:rounded-[40px] transform rotate-3 shadow-lg"></div>
                     <div class="royal-glass p-6 sm:p-8 rounded-[30px] sm:rounded-[40px] border border-[#B48E43]/30 relative bg-white/90">
                         <i class="fa-solid fa-quote-right text-4xl sm:text-5xl text-[#064E3B]/10 absolute -top-4 -right-2"></i>
-                        <p class="text-[#064E3B] font-serif italic text-base sm:text-xl leading-relaxed relative z-10">
-                            "Ke mana pun kakimu melangkah, doa kami akan selalu menjadi payung yang melindungimu."
-                        </p>
+                        <p class="text-[#064E3B] font-serif italic text-base sm:text-xl leading-relaxed relative z-10">"Ke mana pun kakimu melangkah, doa kami akan selalu menjadi payung yang melindungimu."</p>
                         <div class="w-16 h-[2px] bg-[#B48E43] mx-auto my-4 opacity-50"></div>
                         <p class="text-xs text-[#B48E43] font-bold uppercase tracking-[0.3em]">— Kakek dan Nenek</p>
                     </div>
                 </div>
             </section>
 
-            {{-- DIVIDER --}}
-            <div class="relative z-20 -mt-8 sm:-mt-10 flex justify-center opacity-90 drop-shadow-sm px-4">
-                <svg width="100%" height="40" viewBox="0 0 300 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0 Q150 50 300 0 V40 H0 Z" fill="#F0FDF4"/>
-                    <path d="M0 0 Q150 50 300 0" fill="none" stroke="#B48E43" stroke-width="2"/>
-                    <circle cx="150" cy="25" r="6" fill="#064E3B" stroke="#FDE68A" stroke-width="2"/>
-                </svg>
-            </div>
-
-            {{-- ================= 3. DETAIL ACARA SECTION ================= --}}
+            {{-- 3. DETAIL ACARA SECTION --}}
             <section class="py-16 sm:py-20 px-4 sm:px-6 relative z-10">
                 <div class="text-center mb-12" data-aos="fade-down">
                     <h2 class="font-decor text-4xl sm:text-6xl text-[#064E3B] mb-4 drop-shadow-sm">Rangkaian Acara</h2>
@@ -151,68 +139,45 @@
                 </div>
 
                 <div class="grid grid-cols-1 gap-6 max-w-lg mx-auto">
-                    {{-- Card 1: Hari --}}
                     <div class="royal-glass p-5 sm:p-6 rounded-[30px] flex items-center gap-4 sm:gap-6 transform hover:-translate-y-1 transition-all group border border-white shadow-lg bg-white/80" data-aos="fade-right">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#D1FAE5] rounded-2xl sm:rounded-3xl rotate-3 flex items-center justify-center text-[#064E3B] text-2xl sm:text-3xl shadow-sm border border-[#064E3B]/20 shrink-0">
-                            <i class="fa-solid fa-calendar-day"></i>
-                        </div>
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#D1FAE5] rounded-2xl sm:rounded-3xl rotate-3 flex items-center justify-center text-[#064E3B] text-2xl sm:text-3xl shadow-sm border border-[#064E3B]/20 shrink-0"><i class="fa-solid fa-calendar-day"></i></div>
                         <div>
                             <h4 class="font-bold text-[#064E3B] text-lg sm:text-xl mb-1">Hari & Tanggal</h4>
                             <p class="text-gray-700 font-medium text-base sm:text-lg">Jum'at, 02 Januari 2026</p>
                             <p class="text-[10px] sm:text-xs text-[#059669] font-bold bg-[#D1FAE5] px-2 sm:px-3 py-1 rounded-full w-fit mt-1">Awal Tahun Baru</p>
                         </div>
                     </div>
-
-                    {{-- Card 2: Jam --}}
                     <div class="royal-glass p-5 sm:p-6 rounded-[30px] flex items-center gap-4 sm:gap-6 transform hover:-translate-y-1 transition-all group border border-white shadow-lg bg-white/80" data-aos="fade-left" data-aos-delay="100">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#FEF3C7] rounded-2xl sm:rounded-3xl -rotate-3 flex items-center justify-center text-[#D97706] text-2xl sm:text-3xl shadow-sm border border-[#D97706]/20 shrink-0">
-                            <i class="fa-solid fa-clock"></i>
-                        </div>
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#FEF3C7] rounded-2xl sm:rounded-3xl -rotate-3 flex items-center justify-center text-[#D97706] text-2xl sm:text-3xl shadow-sm border border-[#D97706]/20 shrink-0"><i class="fa-solid fa-clock"></i></div>
                         <div>
                             <h4 class="font-bold text-[#064E3B] text-lg sm:text-xl mb-1">Waktu Acara</h4>
                             <p class="text-gray-700 font-medium text-base sm:text-lg">08.00 WIB s.d Selesai</p>
                             <p class="text-[10px] sm:text-xs text-[#D97706] font-bold bg-[#FEF3C7] px-2 sm:px-3 py-1 rounded-full w-fit mt-1">Diharapkan Tepat Waktu</p>
                         </div>
                     </div>
-
-                    {{-- Card 3: Agenda --}}
                     <div class="royal-glass p-5 sm:p-6 rounded-[30px] flex items-center gap-4 sm:gap-6 transform hover:-translate-y-1 transition-all group border border-white shadow-lg bg-white/80" data-aos="fade-right" data-aos-delay="200">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#D1FAE5] rounded-2xl sm:rounded-3xl rotate-3 flex items-center justify-center text-[#064E3B] text-2xl sm:text-3xl shadow-sm border border-[#064E3B]/20 shrink-0">
-                            <i class="fa-solid fa-handshake-simple"></i>
-                        </div>
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#D1FAE5] rounded-2xl sm:rounded-3xl rotate-3 flex items-center justify-center text-[#064E3B] text-2xl sm:text-3xl shadow-sm border border-[#064E3B]/20 shrink-0"><i class="fa-solid fa-handshake-simple"></i></div>
                         <div>
                             <h4 class="font-bold text-[#064E3B] text-lg sm:text-xl mb-1">Agenda Utama</h4>
                             <p class="text-gray-700 font-medium text-base sm:text-lg">Menjamu Tamu Undangan</p>
                             <p class="text-xs text-gray-500 mt-1 italic">Ramah Tamah & Doa</p>
                         </div>
                     </div>
-
-                    {{-- Card 4: Hiburan --}}
                     <div class="royal-glass p-5 sm:p-6 rounded-[30px] flex items-center gap-4 sm:gap-6 transform hover:-translate-y-1 transition-all group border border-white shadow-lg bg-white/80" data-aos="fade-left" data-aos-delay="300">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#FEF3C7] rounded-2xl sm:rounded-3xl -rotate-3 flex items-center justify-center text-[#B48E43] text-2xl sm:text-3xl shadow-sm border border-[#B48E43]/20 shrink-0">
-                            <i class="fa-solid fa-music"></i>
-                        </div>
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#FEF3C7] rounded-2xl sm:rounded-3xl -rotate-3 flex items-center justify-center text-[#B48E43] text-2xl sm:text-3xl shadow-sm border border-[#B48E43]/20 shrink-0"><i class="fa-solid fa-music"></i></div>
                         <div>
                             <h4 class="font-bold text-[#064E3B] text-lg sm:text-xl mb-1">Hiburan Spesial</h4>
                             <p class="text-gray-700 font-medium text-base sm:text-lg">Sholawat Bintang Songo</p>
                             <p class="text-[10px] sm:text-xs text-[#B48E43] bg-[#FEF3C7] px-2 py-1 rounded inline-block mt-1 font-bold">Live Hadroh</p>
                         </div>
                     </div>
-
-                    {{-- Card Alamat --}}
                     <div class="mt-6 sm:mt-8 p-1 rounded-[35px] bg-gradient-to-r from-[#064E3B] via-[#B48E43] to-[#064E3B] animate-gradient-x shadow-xl transform hover:scale-[1.01] transition-transform duration-500" data-aos="zoom-in" data-aos-delay="400">
                         <div class="bg-white rounded-[31px] p-6 sm:p-8 text-center relative overflow-hidden">
                             <div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
-                            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-inner border border-gray-100 relative z-10 mx-auto">
-                                <i class="fa-solid fa-map-location-dot text-3xl sm:text-4xl text-[#064E3B] drop-shadow-sm animate-bounce-slow"></i>
-                            </div>
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-inner border border-gray-100 relative z-10 mx-auto"><i class="fa-solid fa-map-location-dot text-3xl sm:text-4xl text-[#064E3B] drop-shadow-sm animate-bounce-slow"></i></div>
                             <h4 class="font-decor font-bold text-xl sm:text-2xl mb-2 sm:mb-3 text-[#064E3B] relative z-10">Alamat Lokasi</h4>
-                            <p class="text-gray-700 leading-relaxed text-base sm:text-lg mb-4 sm:mb-6 relative z-10 max-w-xs mx-auto">
-                                Dusun Suka Indah, Desa Suka Makmur RT 003, RW 004 <br> Kec. Giri Mulya Kab. Bengkulu Utara
-                            </p>
-                            <div class="inline-block px-4 sm:px-6 py-2 bg-[#F0FDF4] text-[#064E3B] rounded-full text-xs sm:text-sm font-bold border border-[#064E3B]/20 relative z-10">
-                                <i class="fa-solid fa-house mr-2"></i> Kediaman Bpk. Suwito
-                            </div>
+                            <p class="text-gray-700 leading-relaxed text-base sm:text-lg mb-4 sm:mb-6 relative z-10 max-w-xs mx-auto">Dusun Suka Indah, Desa Suka Makmur RT 003, RW 004 <br> Kec. Giri Mulya Kab. Bengkulu Utara</p>
+                            <div class="inline-block px-4 sm:px-6 py-2 bg-[#F0FDF4] text-[#064E3B] rounded-full text-xs sm:text-sm font-bold border border-[#064E3B]/20 relative z-10"><i class="fa-solid fa-house mr-2"></i> Kediaman Bpk. Suwito</div>
                         </div>
                     </div>
                 </div>
@@ -222,31 +187,16 @@
             <section class="py-16 sm:py-24 px-4 sm:px-6 text-center relative z-10 bg-[#064E3B] text-white overflow-hidden my-6 sm:my-10 rounded-[40px] sm:rounded-[60px] shadow-2xl mx-4 border-4 border-[#B48E43]/50">
                 <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
                 <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/20 to-transparent"></div>
-
                 <div class="relative z-20">
                     <h2 class="font-decor text-3xl sm:text-5xl text-[#FDE68A] mb-8 sm:mb-12 drop-shadow-md">Menuju Hari Bahagia</h2>
-
                     <div class="flex justify-center gap-2 sm:gap-6 mb-10 sm:mb-12 flex-wrap">
-                        {{-- Timer Boxes Responsive --}}
-                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl w-16 sm:w-24 shadow-lg">
-                            <span id="days" class="block text-xl sm:text-4xl font-bold text-[#FDE68A]">00</span><span class="text-[8px] sm:text-[10px] uppercase tracking-widest">Hari</span>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl w-16 sm:w-24 shadow-lg">
-                            <span id="hours" class="block text-xl sm:text-4xl font-bold text-[#FDE68A]">00</span><span class="text-[8px] sm:text-[10px] uppercase tracking-widest">Jam</span>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl w-16 sm:w-24 shadow-lg">
-                            <span id="minutes" class="block text-xl sm:text-4xl font-bold text-[#FDE68A]">00</span><span class="text-[8px] sm:text-[10px] uppercase tracking-widest">Menit</span>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl w-16 sm:w-24 shadow-lg">
-                            <span id="seconds" class="block text-xl sm:text-4xl font-bold text-[#FDE68A]">00</span><span class="text-[8px] sm:text-[10px] uppercase tracking-widest">Detik</span>
-                        </div>
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl w-16 sm:w-24 shadow-lg"><span id="days" class="block text-xl sm:text-4xl font-bold text-[#FDE68A]">00</span><span class="text-[8px] sm:text-[10px] uppercase tracking-widest">Hari</span></div>
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl w-16 sm:w-24 shadow-lg"><span id="hours" class="block text-xl sm:text-4xl font-bold text-[#FDE68A]">00</span><span class="text-[8px] sm:text-[10px] uppercase tracking-widest">Jam</span></div>
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl w-16 sm:w-24 shadow-lg"><span id="minutes" class="block text-xl sm:text-4xl font-bold text-[#FDE68A]">00</span><span class="text-[8px] sm:text-[10px] uppercase tracking-widest">Menit</span></div>
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl w-16 sm:w-24 shadow-lg"><span id="seconds" class="block text-xl sm:text-4xl font-bold text-[#FDE68A]">00</span><span class="text-[8px] sm:text-[10px] uppercase tracking-widest">Detik</span></div>
                     </div>
-
                     <button id="add-to-calendar" class="group relative inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 font-bold text-[#064E3B] transition-all duration-300 bg-gradient-to-r from-[#FDE68A] to-[#FCD34D] rounded-full hover:shadow-[0_0_30px_rgba(253,230,138,0.6)] hover:-translate-y-1 overflow-hidden border border-[#B48E43]" data-aos="zoom-in">
-                        <span class="relative flex items-center gap-2 sm:gap-3 text-base sm:text-lg">
-                            <i class="fa-solid fa-calendar-plus text-lg sm:text-xl group-hover:rotate-12 transition-transform"></i>
-                            Simpan Tanggal
-                        </span>
+                        <span class="relative flex items-center gap-2 sm:gap-3 text-base sm:text-lg"><i class="fa-solid fa-calendar-plus text-lg sm:text-xl group-hover:rotate-12 transition-transform"></i> Simpan Tanggal</span>
                     </button>
                 </div>
             </section>
@@ -256,24 +206,17 @@
                 <div class="royal-glass p-6 sm:p-12 rounded-[40px] sm:rounded-[50px] border border-[#B48E43]/20 shadow-2xl relative overflow-hidden max-w-4xl mx-auto">
                     <div class="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-[#FEF3C7] rounded-bl-[100px] opacity-50"></div>
                     <div class="absolute bottom-0 left-0 w-24 sm:w-32 h-24 sm:h-32 bg-[#D1FAE5] rounded-tr-[100px] opacity-50"></div>
-
                     <h2 class="text-center font-decor text-3xl sm:text-4xl text-[#064E3B] mb-10 sm:mb-16 drop-shadow-sm relative z-10" data-aos="fade-down">Turut Mengundang</h2>
-
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 relative z-10">
-                        {{-- Group 1 --}}
                         <div class="space-y-4 sm:space-y-6" data-aos="fade-right">
                             <h3 class="font-bold text-[#B48E43] uppercase tracking-widest border-b pb-2 mb-4 text-center md:text-left text-sm sm:text-base">Perangkat Desa</h3>
-                            {{-- List --}}
                             <div class="flex items-center gap-4 group"><div class="w-10 h-10 rounded-full bg-[#064E3B] text-white flex items-center justify-center shadow-md group-hover:rotate-12 transition"><i class="fa-solid fa-user-tie"></i></div><div><p class="font-bold text-base sm:text-lg text-[#064E3B]">BPK. Subagyo</p><p class="text-[10px] sm:text-xs text-gray-500 uppercase">Kades Suka Makmur</p></div></div>
                             <div class="flex items-center gap-4 group"><div class="w-10 h-10 rounded-full bg-[#064E3B] text-white flex items-center justify-center shadow-md group-hover:rotate-12 transition"><i class="fa-solid fa-user-pen"></i></div><div><p class="font-bold text-base sm:text-lg text-[#064E3B]">BPK. Roni</p><p class="text-[10px] sm:text-xs text-gray-500 uppercase">Sekdes Suka Makmur</p></div></div>
                             <div class="flex items-center gap-4 group"><div class="w-10 h-10 rounded-full bg-[#064E3B] text-white flex items-center justify-center shadow-md group-hover:rotate-12 transition"><i class="fa-solid fa-map-pin"></i></div><div><p class="font-bold text-base sm:text-lg text-[#064E3B]">BPK. Yono</p><p class="text-[10px] sm:text-xs text-gray-500 uppercase">Kadun RW 01</p></div></div>
                             <div class="flex items-center gap-4 group"><div class="w-10 h-10 rounded-full bg-[#064E3B] text-white flex items-center justify-center shadow-md group-hover:rotate-12 transition"><i class="fa-solid fa-map-pin"></i></div><div><p class="font-bold text-base sm:text-lg text-[#064E3B]">BPK. Setiono</p><p class="text-[10px] sm:text-xs text-gray-500 uppercase">Kadun RW 04</p></div></div>
                         </div>
-
-                        {{-- Group 2 --}}
                         <div class="space-y-4 sm:space-y-6" data-aos="fade-left" data-aos-delay="100">
                             <h3 class="font-bold text-[#B48E43] uppercase tracking-widest border-b pb-2 mb-4 text-center md:text-left text-sm sm:text-base">Tokoh Masyarakat</h3>
-                            {{-- List --}}
                             <div class="flex items-center gap-4 group"><div class="w-10 h-10 rounded-full bg-[#B48E43] text-white flex items-center justify-center shadow-md group-hover:rotate-12 transition"><i class="fa-solid fa-gavel"></i></div><div><p class="font-bold text-base sm:text-lg text-[#78350F]">BPK. Suwardi</p><p class="text-[10px] sm:text-xs text-gray-500 uppercase">Ketua Adat</p></div></div>
                             <div class="flex items-center gap-4 group"><div class="w-10 h-10 rounded-full bg-[#B48E43] text-white flex items-center justify-center shadow-md group-hover:rotate-12 transition"><i class="fa-solid fa-users"></i></div><div><p class="font-bold text-base sm:text-lg text-[#78350F]">BPK. Budi Timbul</p><p class="text-[10px] sm:text-xs text-gray-500 uppercase">Ketua RT</p></div></div>
                             <div class="flex items-center gap-4 group"><div class="w-10 h-10 rounded-full bg-[#B48E43] text-white flex items-center justify-center shadow-md group-hover:rotate-12 transition"><i class="fa-solid fa-mosque"></i></div><div><p class="font-bold text-base sm:text-lg text-[#78350F]">BPK. Hj. Arif Safaat</p><p class="text-[10px] sm:text-xs text-gray-500 uppercase">Tokoh Agama</p></div></div>
@@ -285,44 +228,28 @@
                 </div>
             </section>
 
-            {{-- 6. GALERI KENANGAN --}}
+            {{-- 6. GALERI KENANGAN (UPGRADED: Database Dynamic + Elegant Slider) --}}
             <section class="py-16 sm:py-20 px-4 sm:px-6 text-center bg-[#F0FDF4] relative z-10 shadow-inner">
                 <h2 class="font-royal text-3xl sm:text-5xl text-[#064E3B] mb-8 sm:mb-12 drop-shadow-sm" data-aos="fade-up">Galeri Kenangan</h2>
 
+                {{-- Container yang membatasi lebar agar terlihat rapi --}}
                 <div class="p-2 sm:p-4 bg-gradient-to-br from-[#FDE68A] via-[#B48E43] to-[#064E3B] rounded-[30px] sm:rounded-[45px] shadow-2xl max-w-xl mx-auto" data-aos="zoom-in">
                     <div class="swiper mySwiper rounded-[25px] sm:rounded-[35px] overflow-hidden aspect-[4/5] sm:aspect-[4/3] border-[4px] sm:border-[6px] border-white bg-white shadow-inner">
                         <div class="swiper-wrapper">
-
-    {{-- FOTO 1 --}}
-    <div class="swiper-slide">
-        {{-- Pastikan file ada di: public/galeri/1.jpg --}}
-        <img src="{{ asset('/1.jpeg') }}"
-             class="w-full h-full object-cover"
-             alt="Momen 1"
-             onerror="this.src='https://via.placeholder.com/400x500?text=Foto+Tidak+Ditemukan'">
-    </div>
-
-    {{-- FOTO 2 --}}
-    <div class="swiper-slide">
-        {{-- Pastikan file ada di: public/galeri/2.jpg --}}
-        <img src="{{ asset('/2.jpeg') }}"
-             class="w-full h-full object-cover"
-             alt="Momen 2"
-             onerror="this.src='https://via.placeholder.com/400x500?text=Foto+Tidak+Ditemukan'">
-    </div>
-
-    {{-- FOTO 3 --}}
-    <div class="swiper-slide">
-        {{-- Pastikan file ada di: public/galeri/3.jpg --}}
-        <img src="{{ asset('/3.jpeg') }}"
-             class="w-full h-full object-cover"
-             alt="Momen 3"
-             onerror="this.src='https://via.placeholder.com/400x500?text=Foto+Tidak+Ditemukan'">
-    </div>
-</div>
-
-                        <div class="swiper-button-next !text-[#B48E43] !scale-75 sm:!scale-100"></div>
-                        <div class="swiper-button-prev !text-[#B48E43] !scale-75 sm:!scale-100"></div>
+                            @if(isset($setting) && ($setting->gallery_1 || $setting->gallery_2 || $setting->gallery_3))
+                                @if($setting->gallery_1) <div class="swiper-slide"><img src="{{ asset('storage/' . $setting->gallery_1) }}" class="w-full h-full object-cover"></div> @endif
+                                @if($setting->gallery_2) <div class="swiper-slide"><img src="{{ asset('storage/' . $setting->gallery_2) }}" class="w-full h-full object-cover"></div> @endif
+                                @if($setting->gallery_3) <div class="swiper-slide"><img src="{{ asset('storage/' . $setting->gallery_3) }}" class="w-full h-full object-cover"></div> @endif
+                            @else
+                                {{-- Fallback jika belum upload (Pakai file default) --}}
+                                <div class="swiper-slide"><img src="{{ asset('1.jpg') }}" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="{{ asset('2.jpg') }}" class="w-full h-full object-cover"></div>
+                                <div class="swiper-slide"><img src="{{ asset('3.jpg') }}" class="w-full h-full object-cover"></div>
+                            @endif
+                        </div>
+                        {{-- Tombol Navigasi Elegant --}}
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                         <div class="swiper-pagination !bottom-4"></div>
                     </div>
                 </div>
@@ -363,7 +290,7 @@
                 </div>
             </section>
 
-            {{-- 8. KIRIM UCAPAN --}}
+            {{-- 8. KIRIM UCAPAN (FILTERED & DYNAMIC) --}}
             <section class="py-16 sm:py-20 px-4 sm:px-6 relative z-10 bg-gradient-to-b from-white to-[#F0FDF4]">
                 <div class="royal-glass p-6 sm:p-12 rounded-[40px] sm:rounded-[50px] border border-white shadow-xl max-w-2xl mx-auto" data-aos="fade-up">
                     <h2 class="text-center font-royal text-3xl sm:text-4xl text-[#064E3B] mb-8 sm:mb-10">Kirim Ucapan</h2>
@@ -391,7 +318,7 @@
                     </form>
                 </div>
 
-                {{-- List Ucapan --}}
+                {{-- List Ucapan (Hanya yang tidak di-hide admin) --}}
                 <div class="mt-12 sm:mt-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="text-center font-royal text-2xl sm:text-3xl text-[#064E3B] mb-6 sm:mb-8">Doa Para Tamu</h3>
                     <div class="space-y-4 sm:space-y-5 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2 sm:pr-4 custom-scrollbar">
@@ -424,7 +351,7 @@
                     {{-- Live Map Iframe --}}
                     <div class="p-2 sm:p-4 bg-gradient-to-br from-[#B48E43] via-[#FDE68A] to-[#B48E43] rounded-[30px] sm:rounded-[45px] shadow-2xl mb-8 sm:mb-12 transform hover:rotate-1 transition-transform duration-500">
                         <div class="rounded-[25px] sm:rounded-[38px] overflow-hidden h-[300px] sm:h-[400px] relative border-4 border-[#022c22] shadow-inner bg-gray-200">
-                             {{-- Ganti src iframe sesuai maps asli --}}
+                            {{-- Ganti src iframe sesuai maps asli --}}
                             <iframe
                                 src="https://www.google.com/maps?q=-3.3280231,102.0265238&z=17&hl=en"
                                 width="100%"
@@ -454,7 +381,7 @@
 
         </main>
 
-        {{-- ================= MODALS (POPUP CENTERED) ================= --}}
+        {{-- ================= MODALS ================= --}}
 
         {{-- Gift Modal --}}
         <div id="gift-modal" class="modal-overlay fixed inset-0 z-[9999] hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
@@ -490,7 +417,7 @@
             </div>
         </div>
 
-        {{-- RSVP Modal --}}
+        {{-- RSVP Modal (AUTO FILL NAME) --}}
         <div id="rsvp-modal" class="modal-overlay fixed inset-0 z-[9999] hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
             <div class="modal-content bg-[#F0FDF4] w-full max-w-sm rounded-[35px] p-6 sm:p-8 relative border-4 border-[#064E3B] shadow-2xl overflow-y-auto max-h-[90vh]">
                 <button onclick="closeModal('rsvp-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-transform hover:rotate-90 cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -507,7 +434,8 @@
                     @csrf
                     <div>
                         <label class="text-[10px] sm:text-xs font-bold text-[#064E3B] uppercase ml-3">Nama Lengkap</label>
-                        <input type="text" name="name_rsvp" required class="w-full p-3 sm:p-4 bg-white border-2 border-[#A7F3D0] rounded-2xl focus:outline-none focus:border-[#064E3B] font-medium text-sm sm:text-base" placeholder="Nama Anda">
+                        {{-- OTOMATIS TERISI & READONLY AGAR TIDAK DIUBAH --}}
+                        <input type="text" name="name_rsvp" required value="{{ $guest->name ?? '' }}" readonly class="w-full p-3 sm:p-4 bg-gray-100 border-2 border-[#A7F3D0] rounded-2xl focus:outline-none focus:border-[#064E3B] font-bold text-gray-700 text-sm sm:text-base cursor-not-allowed" placeholder="Nama Anda">
                     </div>
                     <div>
                         <label class="text-[10px] sm:text-xs font-bold text-[#064E3B] uppercase ml-3">Status</label>
@@ -516,9 +444,10 @@
                             <option value="tidak_hadir">Maaf, Belum Bisa</option>
                         </select>
                     </div>
-                    <div id="jumlah_tamu_wrapper_modal" class="hidden">
+                    {{-- Wrapper Jumlah Tamu (Default Hidden jika tidak hadir) --}}
+                    <div id="jumlah_tamu_wrapper_modal" class="">
                         <label class="text-[10px] sm:text-xs font-bold text-[#064E3B] uppercase ml-3">Jumlah Tamu</label>
-                        <input type="number" name="attendance_count" min="1" max="5" class="w-full p-3 sm:p-4 bg-white border-2 border-[#A7F3D0] rounded-2xl focus:outline-none focus:border-[#064E3B] font-medium text-sm sm:text-base" placeholder="1">
+                        <input type="number" name="attendance_count" min="1" max="5" value="1" class="w-full p-3 sm:p-4 bg-white border-2 border-[#A7F3D0] rounded-2xl focus:outline-none focus:border-[#064E3B] font-medium text-sm sm:text-base" placeholder="1">
                     </div>
                     <button class="w-full py-3 sm:py-4 rounded-full bg-[#064E3B] text-white font-bold text-base sm:text-lg shadow-lg hover:bg-[#047857] transition mt-2 cursor-pointer">Kirim Konfirmasi</button>
                 </form>
@@ -535,7 +464,7 @@
         // 0. INIT AOS
         AOS.init({ duration: 1000, once: false, mirror: true });
 
-        // 1. MODAL LOGIC (FIXED)
+        // 1. MODAL LOGIC
         function openModal(id) {
             const modal = document.getElementById(id);
             modal.classList.remove('hidden');
@@ -554,7 +483,7 @@
             }, 300);
         }
 
-        // 2. RSVP LOGIC (Show Jumlah Tamu)
+        // 2. RSVP LOGIC (Show/Hide Jumlah Tamu)
         const rsvpSelect = document.getElementById('status_rsvp_modal');
         const guestInput = document.getElementById('jumlah_tamu_wrapper_modal');
         if(rsvpSelect) {
@@ -576,12 +505,25 @@
             document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
         }, 1000);
 
-        // 4. SWIPER
+        // 4. SWIPER (UPDATED: ELEGANT SLIDER)
+        // Effect diubah jadi 'slide' agar smooth dan tidak aneh-aneh
         new Swiper(".mySwiper", {
-            effect: "cards",
+            effect: "slide",
+            speed: 800, // Kecepatan transisi smooth
             grabCursor: true,
             loop: true,
-            autoplay: { delay: 3000 }
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
         });
 
         // 5. COPY CLIPBOARD

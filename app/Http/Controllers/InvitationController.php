@@ -8,22 +8,24 @@ use Illuminate\Support\Str;
 use App\Models\Guest;
 use App\Models\Wish;
 use App\Models\Rsvp;
+use App\Models\SiteSetting;
 
 class InvitationController extends Controller
 {
     public function index(Request $request)
     {
-        // 1. Ambil nama tamu dari URL ?to=Nama
-        $guestName = $request->query('to', 'Tamu Undangan');
+$guestName = $request->query('to', 'Tamu Undangan');
 
-        // 2. Ambil ucapan & rsvp terbaru untuk ditampilkan
-        $wishes = Wish::latest()->get();
+    // HANYA AMBIL YANG TIDAKDI-HIDDEN (is_hidden = 0)
+    $wishes = Wish::where('is_hidden', false)->latest()->get();
 
-        // 3. Kirim data ke view
-        return view('invitation', [
-            'guest' => (object)['name' => $guestName],
-            'wishes' => $wishes
-        ]);
+    $setting = SiteSetting::first();
+
+    return view('invitation', [
+        'guest' => (object)['name' => $guestName],
+        'wishes' => $wishes,
+        'setting' => $setting
+    ]);
     }
 
    public function storeWish(Request $request)

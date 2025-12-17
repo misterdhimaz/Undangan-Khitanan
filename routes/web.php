@@ -22,4 +22,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/guest', [AdminController::class, 'storeGuest'])->name('admin.guest.store');
         Route::delete('/guest/{id}', [AdminController::class, 'destroyGuest'])->name('admin.guest.destroy');
     });
+
+    Route::patch('/admin/wish/{id}/toggle', [AdminController::class, 'toggleWish'])->name('admin.wish.toggle');
+    Route::post('/media', [AdminController::class, 'updateMedia'])->name('admin.media.update');
 });

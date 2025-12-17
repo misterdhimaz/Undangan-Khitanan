@@ -13,8 +13,5 @@ class Wish extends Model
     protected $table = 'wishes';
 
     // Izinkan kolom ini diisi
-    protected $fillable = [
-        'sender_name',
-        'message'
-    ];
+protected $fillable = ['sender_name', 'message', 'is_hidden'];
 }
