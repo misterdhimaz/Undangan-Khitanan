@@ -118,7 +118,10 @@ class AdminController extends Controller
 
             // 2. Ambil Full URL Public-nya
             // Hasilnya akan: https://.../storage/v1/object/public/undangan/uploads/namafile.jpg
-            $url = Storage::disk('supabase')->url($path);
+           // $url = Storage::disk('supabase')->url($path);
+
+           $baseUrl = rtrim(env('SUPABASE_URL'), '/');
+$url = $baseUrl . '/' . $path;
 
             // 3. Simpan URL ke Database
             $setting->$dbColumn = $url;
