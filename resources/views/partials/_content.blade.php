@@ -237,9 +237,9 @@
                     <div class="swiper mySwiper rounded-[25px] sm:rounded-[35px] overflow-hidden aspect-[4/5] sm:aspect-[4/3] border-[4px] sm:border-[6px] border-white bg-white shadow-inner">
                         <div class="swiper-wrapper">
                             @if(isset($setting) && ($setting->gallery_1 || $setting->gallery_2 || $setting->gallery_3))
-                                @if($setting->gallery_1) <div class="swiper-slide"><img src="{{ asset('storage/' . $setting->gallery_1) }}" class="w-full h-full object-cover"></div> @endif
-                                @if($setting->gallery_2) <div class="swiper-slide"><img src="{{ asset('storage/' . $setting->gallery_2) }}" class="w-full h-full object-cover"></div> @endif
-                                @if($setting->gallery_3) <div class="swiper-slide"><img src="{{ asset('storage/' . $setting->gallery_3) }}" class="w-full h-full object-cover"></div> @endif
+                                @if($setting->gallery_1) <div class="swiper-slide"><img src="{{ $setting->gallery_1 }}" class="w-full h-full object-cover"></div> @endif
+                                @if($setting->gallery_2) <div class="swiper-slide"><img src="{{ $setting->gallery_2 }}" class="w-full h-full object-cover"></div> @endif
+                                @if($setting->gallery_3) <div class="swiper-slide"><img src="{{ $setting->gallery_3 }}" class="w-full h-full object-cover"></div> @endif
                             @else
                                 {{-- Fallback jika belum upload (Pakai file default) --}}
                                 <div class="swiper-slide"><img src="{{ asset('1.jpg') }}" class="w-full h-full object-cover"></div>

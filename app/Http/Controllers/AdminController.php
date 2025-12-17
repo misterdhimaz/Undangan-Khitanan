@@ -96,32 +96,36 @@ class AdminController extends Controller
     }
 
     // --- MANAJEMEN MEDIA (UPLOAD) ---
-    public function updateMedia(Request $request) {
-        $request->validate([
-            'music' => 'nullable|mimes:mp3,wav|max:10000', // Max 10MB
-            'gallery_1' => 'nullable|image|max:5000',     // Max 5MB
-            'gallery_2' => 'nullable|image|max:5000',
-            'gallery_3' => 'nullable|image|max:5000',
-        ]);
+   public function updateMedia(Request $request) {
+    // Validasi (Supabase kuat, tapi kita batasi biar aman)
+    $request->validate([
+        'music' => 'nullable|mimes:mp3,wav|max:5000', // 5MB
+        'gallery_1' => 'nullable|image|max:5000',
+        'gallery_2' => 'nullable|image|max:5000',
+        'gallery_3' => 'nullable|image|max:5000',
+    ]);
 
-        $setting = SiteSetting::first();
-        if(!$setting) $setting = SiteSetting::create([]);
+    $setting = SiteSetting::first();
+    if(!$setting) $setting = SiteSetting::create([]);
 
-        $fields = ['music' => 'music_path', 'gallery_1' => 'gallery_1', 'gallery_2' => 'gallery_2', 'gallery_3' => 'gallery_3'];
+    $fields = ['music' => 'music_path', 'gallery_1' => 'gallery_1', 'gallery_2' => 'gallery_2', 'gallery_3' => 'gallery_3'];
 
-        foreach($fields as $inputName => $dbColumn) {
-            if ($request->hasFile($inputName)) {
-                // Hapus file lama jika ada
-                if ($setting->$dbColumn && Storage::disk('public')->exists($setting->$dbColumn)) {
-                    Storage::disk('public')->delete($setting->$dbColumn);
-                }
-                // Upload file baru ke folder public/uploads
-                $path = $request->file($inputName)->store('uploads', 'public');
-                $setting->$dbColumn = $path;
-            }
+    foreach($fields as $inputName => $dbColumn) {
+        if ($request->hasFile($inputName)) {
+            // 1. Upload ke Supabase (folder 'uploads' di dalam bucket 'undangan')
+            // Parameter kedua 'supabase' adalah nama disk yang kita buat di config/filesystems.php
+            $path = $request->file($inputName)->store('uploads', 'supabase');
+
+            // 2. Ambil Full URL Public-nya
+            // Hasilnya akan: https://.../storage/v1/object/public/undangan/uploads/namafile.jpg
+            $url = Storage::disk('supabase')->url($path);
+
+            // 3. Simpan URL ke Database
+            $setting->$dbColumn = $url;
         }
-
-        $setting->save();
-        return back()->with('success', 'Media berhasil diperbarui!');
     }
+
+    $setting->save();
+    return back()->with('success', 'Media berhasil diupload ke Supabase!');
+}
 }

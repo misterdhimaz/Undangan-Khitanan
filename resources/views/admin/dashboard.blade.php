@@ -334,7 +334,7 @@
                                         <div class="space-y-3 group">
                                             <div class="aspect-[3/4] bg-gray-100 rounded-3xl overflow-hidden border-2 border-gray-200 relative group-hover:border-emerald-400 group-hover:shadow-lg transition-all">
                                                 @if($setting->$galleryKey)
-                                                    <img src="{{ asset('storage/' . $setting->$galleryKey) }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                                                    <img src="{{ $setting->gallery_1 }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                                                     <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold">Ubah</div>
                                                 @else
                                                     <div class="w-full h-full flex flex-col items-center justify-center text-gray-300 bg-gray-50 group-hover:bg-white transition-colors">

@@ -30,6 +30,18 @@ return [
 
     'disks' => [
 
+        'supabase' => [
+            'driver' => 's3',
+            'key' => env('SUPABASE_ACCESS_KEY_ID'),
+            'secret' => env('SUPABASE_SECRET_ACCESS_KEY'),
+            'region' => env('SUPABASE_REGION', 'us-east-1'),
+            'bucket' => env('SUPABASE_BUCKET'),
+            'endpoint' => env('SUPABASE_ENDPOINT'),
+            'url' => env('SUPABASE_URL'), // Untuk generate URL public
+            'use_path_style_endpoint' => true,
+            'throw' => false,
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
